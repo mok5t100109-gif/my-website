@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salon Portfolio</title>
+    <meta name="description" content="白と黒を基調としたシンプルでおしゃれな美容室・スタイリストのポートフォリオサイト">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Noto+Sans+JP:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <header class="header">
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#hero" class="active">Home</a></li>
+                <li><a href="#about">About Me</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#concept">Concept</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- 1. Hero Section -->
+        <section id="hero" class="section hero bg-white fade-in">
+            <div class="container text-center">
+                <h1 class="main-title">HAIR SALON<br>PORTFOLIO</h1>
+                <p class="subtitle">シンプルで洗練されたスタイルを。</p>
+                <a href="#contact" class="btn btn-dark">お問い合わせ</a>
+            </div>
+        </section>
+
+        <!-- 2. About Me Section -->
+        <section id="about" class="section about bg-black fade-in">
+            <div class="container text-center">
+                <h2 class="section-title">About Me</h2>
+                <div class="profile">
+                    <div class="profile-img-wrapper">
+                        <img src="images/profile.png" alt="Stylist Profile" class="profile-img">
+                    </div>
+                    <p class="profile-text">
+                        東京を拠点に活動するヘアスタイリスト。<br>
+                        お客様一人ひとりの個性を引き出し、日常に溶け込む洗練されたスタイルを提案します。<br>
+                        「白と黒」のように、シンプルでありながら強い印象を残すデザインが得意です。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Skills Section -->
+        <section id="skills" class="section skills bg-white fade-in">
+            <div class="container text-center">
+                <h2 class="section-title">Skills</h2>
+                <p class="subtitle">MENU & DESIGN</p>
+                <div class="skills-grid">
+                    <div class="skill-item">
+                        <div class="skill-img-wrapper">
+                            <img src="images/cut.png" alt="Cut Style" class="skill-img">
+                        </div>
+                        <div class="skill-content">
+                            <h3>Cut</h3>
+                            <p>骨格や髪質を見極め、360度どこから見ても美しいシルエットに仕上げる似合わせカット。</p>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-img-wrapper">
+                            <img src="images/color.png" alt="Color Style" class="skill-img">
+                        </div>
+                        <div class="skill-content">
+                            <h3>Color</h3>
+                            <p>透明感のあるニュアンスカラーから、エッジの効いた洗練されたデザインカラーまで。</p>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-img-wrapper">
+                            <img src="images/perm.png" alt="Perm Style" class="skill-img">
+                        </div>
+                        <div class="skill-content">
+                            <h3>Perm</h3>
+                            <p>髪への負担を最小限に抑え、ご自宅でも簡単にサロンクオリティを再現できるパーマスタイル。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Concept Section -->
+        <section id="concept" class="section concept bg-black fade-in">
+            <div class="container text-center">
+                <h2 class="section-title">Concept</h2>
+                <p class="concept-text">
+                    "Less is More"<br><br>
+                    余計なものを削ぎ落とし、本質的な美しさを追求します。<br>
+                    あなただけの魅力を最大限に引き出すお手伝いをさせてください。
+                </p>
+            </div>
+        </section>
+
+        <!-- 5. Contact Section -->
+        <section id="contact" class="section contact bg-white fade-in">
+            <div class="container text-center">
+                <h2 class="section-title">Contact</h2>
+                <p class="contact-text">ご予約・お問い合わせはお気軽にどうぞ。</p>
+                <a href="mailto:info@example.com" class="btn btn-dark contact-btn">お問い合わせはこちら</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer bg-black">
+        <div class="container text-center">
+            <div class="sns-links">
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            </div>
+            <p class="copyright">&copy; 2026 Hair Salon Portfolio. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
