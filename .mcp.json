@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "luch": {
+      "type": "sse",
+      "url": "https://mcp.luch.dev/functions/v1/connect?token=38eb4270&ide=claude_code"
+    }
+  }
+}
