@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>店長会議資料 2026年4月</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Hiragino Sans', 'Meiryo', sans-serif;
+      background: #f5f5f5;
+      color: #333;
+      padding: 20px;
+    }
+    .page {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 40px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    h1 {
+      font-size: 22px;
+      text-align: center;
+      border-bottom: 3px solid #2c5f8a;
+      padding-bottom: 10px;
+      margin-bottom: 6px;
+      color: #2c5f8a;
+    }
+    .subtitle {
+      text-align: center;
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 28px;
+    }
+    h2 {
+      font-size: 15px;
+      background: #2c5f8a;
+      color: #fff;
+      padding: 6px 12px;
+      margin: 24px 0 10px;
+      border-radius: 3px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+    th {
+      background: #e8f0f7;
+      padding: 8px 10px;
+      text-align: center;
+      border: 1px solid #ccc;
+      font-weight: bold;
+    }
+    td {
+      padding: 7px 10px;
+      border: 1px solid #ddd;
+      text-align: center;
+    }
+    tr:nth-child(even) td { background: #fafafa; }
+    .label { text-align: left; font-weight: bold; }
+    .good { color: #1a7a3a; font-weight: bold; }
+    .warn { color: #c0392b; font-weight: bold; }
+    .neutral { color: #555; }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+    .kpi-box {
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      padding: 14px;
+      text-align: center;
+    }
+    .kpi-box .kpi-label { font-size: 12px; color: #666; margin-bottom: 4px; }
+    .kpi-box .kpi-value { font-size: 22px; font-weight: bold; color: #2c5f8a; }
+    .kpi-box .kpi-target { font-size: 11px; color: #999; margin-top: 2px; }
+    .kpi-box .kpi-rate { font-size: 13px; margin-top: 4px; }
+
+    .bar-row { display: flex; align-items: center; gap: 10px; margin: 5px 0; }
+    .bar-label { width: 130px; font-size: 12px; text-align: right; flex-shrink: 0; }
+    .bar-track { flex: 1; background: #eee; border-radius: 4px; height: 18px; position: relative; }
+    .bar-fill { height: 100%; border-radius: 4px; }
+    .bar-text { position: absolute; right: 6px; top: 1px; font-size: 11px; color: #333; font-weight: bold; }
+    .bar-good { background: #3498db; }
+    .bar-warn { background: #e74c3c; }
+    .bar-ok { background: #f39c12; }
+
+    .note-box {
+      border-left: 4px solid #2c5f8a;
+      background: #f0f5fb;
+      padding: 10px 14px;
+      margin: 8px 0;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .section-note { font-size: 11px; color: #888; margin-top: 4px; }
+
+    @media print {
+      body { background: white; padding: 0; }
+      .page { box-shadow: none; padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <h1>店長会議資料</h1>
+  <div class="subtitle">2026年4月度　集計期間：4月1日〜4月25日（稼働19日）　※残り3営業日</div>
+
+  <!-- KPI -->
+  <h2>■ 主要KPI（4/25時点）</h2>
+  <div class="kpi-grid">
+    <div class="kpi-box">
+      <div class="kpi-label">総売上</div>
+      <div class="kpi-value">2,796,110円</div>
+      <div class="kpi-target">月間目標：3,300,000円</div>
+      <div class="kpi-rate warn">達成率 84.7%　残503,890円</div>
+    </div>
+    <div class="kpi-box">
+      <div class="kpi-label">総客数</div>
+      <div class="kpi-value">411人</div>
+      <div class="kpi-target">月間目標：480人</div>
+      <div class="kpi-rate warn">達成率 85.6%　残69人</div>
+    </div>
+    <div class="kpi-box">
+      <div class="kpi-label">客単価</div>
+      <div class="kpi-value">6,803円</div>
+      <div class="kpi-target">月間目標：6,875円</div>
+      <div class="kpi-rate good">達成率 99.0%</div>
+    </div>
+  </div>
+  <div class="note-box">
+    残り3営業日（4/26・4/29・4/30）で1日あたり<strong>約167,963円・約23人</strong>のペースが必要です。
+  </div>
+
+  <!-- 前年対比 -->
+  <h2>■ 前年対比</h2>
+  <table>
+    <tr>
+      <th>項目</th>
+      <th>前年実績</th>
+      <th>今年実績</th>
+      <th>前年比</th>
+    </tr>
+    <tr>
+      <td class="label">総売上</td>
+      <td>2,267,252円</td>
+      <td>2,796,110円</td>
+      <td class="good">+23.3%</td>
+    </tr>
+    <tr>
+      <td class="label">総客数</td>
+      <td>334人</td>
+      <td>411人</td>
+      <td class="good">+23.1%</td>
+    </tr>
+    <tr>
+      <td class="label">客単価</td>
+      <td>6,788円</td>
+      <td>6,803円</td>
+      <td class="good">+0.2%</td>
+    </tr>
+  </table>
+
+  <!-- メニュー比率 -->
+  <h2>■ メニュー達成率</h2>
+  <div class="bar-row">
+    <div class="bar-label">カラー</div>
+    <div class="bar-track">
+      <div class="bar-fill bar-ok" style="width:64%"></div>
+      <div class="bar-text">128人 / 目標200人（64%）</div>
+    </div>
+  </div>
+  <div class="bar-row">
+    <div class="bar-label">パーマ</div>
+    <div class="bar-track">
+      <div class="bar-fill bar-warn" style="width:37%"></div>
+      <div class="bar-text">15人 / 目標50人（37%）</div>
+    </div>
+  </div>
+  <div class="bar-row">
+    <div class="bar-label">プラスメニュー</div>
+    <div class="bar-track">
+      <div class="bar-fill bar-good" style="width:100%"></div>
+      <div class="bar-text">107人（26.1%）</div>
+    </div>
+  </div>
+  <div class="bar-row">
+    <div class="bar-label">リラクゼーション</div>
+    <div class="bar-track">
+      <div class="bar-fill bar-good" style="width:100%"></div>
+      <div class="bar-text">75人（18.3%）</div>
+    </div>
+  </div>
+  <div class="bar-row">
+    <div class="bar-label">set menu</div>
+    <div class="bar-track">
+      <div class="bar-fill bar-good" style="width:100%"></div>
+      <div class="bar-text">78人（19.0%）</div>
+    </div>
+  </div>
+
+  <!-- 客層 -->
+  <h2>■ 客層内訳</h2>
+  <table>
+    <tr>
+      <th>区分</th>
+      <th>人数</th>
+      <th>構成比</th>
+      <th>備考</th>
+    </tr>
+    <tr>
+      <td class="label">固定客</td>
+      <td>315人</td>
+      <td>76.6%</td>
+      <td class="good">安定基盤</td>
+    </tr>
+    <tr>
+      <td class="label">ごぶさた客</td>
+      <td>49人</td>
+      <td>11.9%</td>
+      <td class="neutral">再来促進余地あり</td>
+    </tr>
+    <tr>
+      <td class="label">再来客</td>
+      <td>24人</td>
+      <td>5.8%</td>
+      <td class="neutral">—</td>
+    </tr>
+    <tr>
+      <td class="label">新規客</td>
+      <td>23人</td>
+      <td>5.6%</td>
+      <td class="warn">目標50人の46%</td>
+    </tr>
+    <tr>
+      <td class="label"><strong>合計</strong></td>
+      <td><strong>411人</strong></td>
+      <td>100%</td>
+      <td>—</td>
+    </tr>
+  </table>
+
+  <!-- 財務 -->
+  <h2>■ 財務内訳</h2>
+  <div class="two-col">
+    <div>
+      <table>
+        <tr><th colspan="2">支払方法</th></tr>
+        <tr><td class="label">現金</td><td>2,145,024円</td></tr>
+        <tr><td class="label">クレジット</td><td>930,675円</td></tr>
+        <tr><td class="label">合計</td><td><strong>3,075,699円</strong></td></tr>
+      </table>
+    </div>
+    <div>
+      <table>
+        <tr><th colspan="2">値引き内訳</th></tr>
+        <tr><td class="label">技術値引き合計</td><td class="warn">355,555円</td></tr>
+        <tr><td class="label">（ポイント・新規割引）</td><td>—</td></tr>
+        <tr><td class="label">売上比</td><td class="warn">約12.7%</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- 3月実績 -->
+  <h2>■ 3月実績（参考）</h2>
+  <table>
+    <tr>
+      <th>項目</th>
+      <th>目標</th>
+      <th>実績</th>
+      <th>達成率</th>
+    </tr>
+    <tr>
+      <td class="label">総売上</td>
+      <td>3,500,000円</td>
+      <td>3,116,334円</td>
+      <td class="warn">89%</td>
+    </tr>
+    <tr>
+      <td class="label">総客数</td>
+      <td>500人</td>
+      <td>459人</td>
+      <td class="warn">91%</td>
+    </tr>
+    <tr>
+      <td class="label">新規客</td>
+      <td>50人</td>
+      <td>54人</td>
+      <td class="good">108%</td>
+    </tr>
+    <tr>
+      <td class="label">前年同月差</td>
+      <td>—</td>
+      <td colspan="2" class="warn">-1,541,360円</td>
+    </tr>
+  </table>
+
+  <!-- 課題と対策 -->
+  <h2>■ 課題と対策</h2>
+  <table>
+    <tr>
+      <th>課題</th>
+      <th>現状</th>
+      <th>対策案</th>
+    </tr>
+    <tr>
+      <td class="label warn">新規客が少ない</td>
+      <td>23人（目標比46%）</td>
+      <td>SNS・ホットペッパー強化、紹介促進</td>
+    </tr>
+    <tr>
+      <td class="label warn">パーマが低調</td>
+      <td>15人（目標比37%）</td>
+      <td>来店客への提案強化、メニュー訴求</td>
+    </tr>
+    <tr>
+      <td class="label warn">値引き率が高い</td>
+      <td>売上の約12.7%</td>
+      <td>新規割引条件の見直し検討</td>
+    </tr>
+    <tr>
+      <td class="label good">前年比は好調</td>
+      <td>+23%</td>
+      <td>この水準を維持・継続</td>
+    </tr>
+  </table>
+
+  <div class="note-box" style="margin-top:20px;">
+    作成日：2026年4月25日　　データ出典：サロンボード
+  </div>
+
+</div>
+</body>
+</html>
