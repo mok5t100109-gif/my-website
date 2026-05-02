@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>マナス — Instagram 管理</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Noto+Sans+JP:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --black: #111;
+            --white: #fff;
+            --gray: #f5f5f5;
+            --mid: #888;
+            --border: rgba(0,0,0,0.1);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Outfit', 'Noto Sans JP', sans-serif;
+            background: var(--gray);
+            color: var(--black);
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Header */
+        .admin-header {
+            background: var(--black);
+            color: var(--white);
+            padding: 20px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .admin-header h1 {
+            font-size: 1rem;
+            font-weight: 400;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+        .admin-header a {
+            color: rgba(255,255,255,0.5);
+            text-decoration: none;
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            transition: color 0.2s;
+        }
+        .admin-header a:hover { color: var(--white); }
+
+        /* Layout */
+        .admin-body {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        /* Card */
+        .card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            padding: 30px;
+        }
+        .card-title {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--mid);
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        /* Status banner */
+        .status-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .status-badge {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+        }
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ccc;
+            flex-shrink: 0;
+        }
+        .dot.connected { background: #3a3; }
+        .dot.disconnected { background: #c33; }
+        .status-detail { font-size: 0.8rem; color: var(--mid); }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: background 0.25s, color 0.25s;
+            font-family: inherit;
+        }
+        .btn-dark { background: var(--black); color: var(--white); }
+        .btn-dark:hover { background: #333; }
+        .btn-outline {
+            background: transparent;
+            color: var(--black);
+            border: 1px solid var(--black);
+        }
+        .btn-outline:hover { background: var(--black); color: var(--white); }
+        .btn-sm { padding: 8px 18px; font-size: 0.75rem; }
+        .btn-danger { background: #c00; color: var(--white); }
+        .btn-danger:hover { background: #900; }
+        .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+        /* Form */
+        .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; }
+        .form-group label { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mid); }
+        .form-group input,
+        .form-group textarea {
+            padding: 12px 14px;
+            border: 1px solid var(--border);
+            font-size: 0.9rem;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.2s;
+            background: var(--white);
+            resize: vertical;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus { border-color: var(--black); }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .form-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 8px; }
+
+        /* Caption area */
+        #captionArea { min-height: 100px; }
+
+        /* Posts table */
+        .posts-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); }
+        .post-row {
+            background: var(--white);
+            display: grid;
+            grid-template-columns: 60px 1fr 120px 120px 80px;
+            align-items: center;
+            gap: 16px;
+            padding: 14px 16px;
+            font-size: 0.85rem;
+        }
+        .post-row.header {
+            background: var(--gray);
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--mid);
+        }
+        .post-thumb {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            display: block;
+            background: var(--gray);
+        }
+        .post-caption-preview {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 300px;
+            color: #333;
+        }
+        .post-date { font-size: 0.78rem; color: var(--mid); }
+        .badge {
+            display: inline-block;
+            padding: 3px 10px;
+            font-size: 0.7rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        .badge-scheduled { background: #e8f0fe; color: #1a56db; }
+        .badge-pending, .badge-processing { background: #fff3cd; color: #856404; }
+        .badge-published { background: #d1e7dd; color: #0f5132; }
+        .badge-failed { background: #f8d7da; color: #721c24; }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: var(--mid);
+            font-size: 0.9rem;
+        }
+
+        /* Alert */
+        .alert {
+            padding: 14px 18px;
+            font-size: 0.88rem;
+            margin-bottom: 20px;
+            border-left: 3px solid;
+        }
+        .alert-success { background: #d1e7dd; border-color: #0f5132; color: #0f5132; }
+        .alert-error { background: #f8d7da; border-color: #721c24; color: #721c24; }
+
+        @media (max-width: 640px) {
+            .admin-header { padding: 16px 20px; }
+            .form-row { grid-template-columns: 1fr; }
+            .post-row { grid-template-columns: 1fr 80px 70px; }
+            .post-row > *:nth-child(1),
+            .post-row > *:nth-child(4) { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="admin-header">
+    <h1>マナス &nbsp;/&nbsp; Instagram 管理</h1>
+    <a href="/"><i class="fas fa-arrow-left"></i>&nbsp; サイトへ戻る</a>
+</header>
+
+<div class="admin-body">
+
+    <!-- Alert area -->
+    <div id="alertArea"></div>
+
+    <!-- Instagram Connection -->
+    <div class="card">
+        <div class="card-title">Instagram アカウント</div>
+        <div class="status-row">
+            <div class="status-badge">
+                <span class="dot" id="statusDot"></span>
+                <div>
+                    <div id="statusText">確認中…</div>
+                    <div class="status-detail" id="statusDetail"></div>
+                </div>
+            </div>
+            <a href="/auth/instagram/start" class="btn btn-outline btn-sm" id="connectBtn">
+                <i class="fab fa-instagram"></i>&nbsp; Instagramに接続
+            </a>
+        </div>
+    </div>
+
+    <!-- New Post -->
+    <div class="card">
+        <div class="card-title">新規投稿を作成</div>
+
+        <div class="form-group">
+            <label>画像URL <span style="color:#c00">*</span></label>
+            <input type="url" id="imageUrl" placeholder="https://example.com/your-image.jpg">
+            <small style="color:var(--mid);font-size:0.75rem">公開されているHTTPS画像URLを入力してください</small>
+        </div>
+
+        <div class="form-group">
+            <label>投稿の説明（AIキャプション生成用）</label>
+            <input type="text" id="postDescription" placeholder="例：ナチュラルなボブカット、透け感のあるカラー">
+        </div>
+        <button class="btn btn-outline btn-sm" id="generateBtn" type="button">
+            <i class="fas fa-magic"></i>&nbsp; AIキャプション生成
+        </button>
+
+        <div style="margin-top:20px" class="form-group">
+            <label>キャプション <span style="color:#c00">*</span></label>
+            <textarea id="captionArea" rows="5" placeholder="キャプションを入力、またはAIで生成してください"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>スケジュール（空欄 = 即時投稿）</label>
+            <input type="datetime-local" id="scheduledAt">
+        </div>
+
+        <div class="form-actions">
+            <button class="btn btn-dark" id="postBtn" type="button">
+                <i class="fas fa-paper-plane"></i>&nbsp; 投稿する
+            </button>
+            <button class="btn btn-outline" id="clearBtn" type="button">クリア</button>
+        </div>
+    </div>
+
+    <!-- Posts List -->
+    <div class="card">
+        <div class="card-title">投稿一覧</div>
+        <div id="postsList"></div>
+    </div>
+
+</div>
+
+<script>
+    const API = '';
+
+    // ── Init ────────────────────────────────────────────────────────────────────
+
+    (async function init() {
+        handleURLParams();
+        await loadStatus();
+        await loadPosts();
+    })();
+
+    function handleURLParams() {
+        const p = new URLSearchParams(location.search);
+        if (p.get('connected')) showAlert('Instagramの接続に成功しました！', 'success');
+        if (p.get('error')) showAlert('エラー: ' + p.get('error'), 'error');
+        history.replaceState({}, '', '/admin.html');
+    }
+
+    // ── Status ──────────────────────────────────────────────────────────────────
+
+    async function loadStatus() {
+        try {
+            const data = await apiFetch('/api/status');
+            const dot = document.getElementById('statusDot');
+            const text = document.getElementById('statusText');
+            const detail = document.getElementById('statusDetail');
+            const btn = document.getElementById('connectBtn');
+
+            if (data.connected) {
+                dot.className = 'dot connected';
+                text.textContent = '接続済み: ' + data.pageName;
+                detail.textContent = '接続日時: ' + new Date(data.connectedAt).toLocaleString('ja-JP');
+                btn.textContent = '再接続';
+            } else {
+                dot.className = 'dot disconnected';
+                text.textContent = '未接続';
+                detail.textContent = 'Instagramビジネスアカウントを接続してください';
+            }
+        } catch {
+            document.getElementById('statusText').textContent = '状態の取得に失敗しました';
+        }
+    }
+
+    // ── Caption Generation ──────────────────────────────────────────────────────
+
+    document.getElementById('generateBtn').addEventListener('click', async () => {
+        const desc = document.getElementById('postDescription').value.trim();
+        if (!desc) { showAlert('説明を入力してください', 'error'); return; }
+
+        const btn = document.getElementById('generateBtn');
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>&nbsp; 生成中…';
+
+        try {
+            const data = await apiFetch('/api/caption', {
+                method: 'POST',
+                headers: { 'content-type': 'application/json' },
+                body: JSON.stringify({ description: desc })
+            });
+            document.getElementById('captionArea').value = data.caption;
+        } catch (err) {
+            showAlert('キャプション生成に失敗しました: ' + err.message, 'error');
+        } finally {
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-magic"></i>&nbsp; AIキャプション生成';
+        }
+    });
+
+    // ── Post ────────────────────────────────────────────────────────────────────
+
+    document.getElementById('postBtn').addEventListener('click', async () => {
+        const imageUrl = document.getElementById('imageUrl').value.trim();
+        const caption = document.getElementById('captionArea').value.trim();
+        const scheduledAt = document.getElementById('scheduledAt').value;
+
+        if (!imageUrl || !caption) {
+            showAlert('画像URLとキャプションは必須です', 'error');
+            return;
+        }
+
+        const btn = document.getElementById('postBtn');
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>&nbsp; 送信中…';
+
+        try {
+            const body = { imageUrl, caption };
+            if (scheduledAt) body.scheduledAt = new Date(scheduledAt).toISOString();
+
+            await apiFetch('/api/posts', {
+                method: 'POST',
+                headers: { 'content-type': 'application/json' },
+                body: JSON.stringify(body)
+            });
+
+            showAlert(scheduledAt ? '投稿をスケジュールしました！' : '投稿を開始しました！', 'success');
+            document.getElementById('clearBtn').click();
+            await loadPosts();
+        } catch (err) {
+            showAlert('投稿に失敗しました: ' + err.message, 'error');
+        } finally {
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-paper-plane"></i>&nbsp; 投稿する';
+        }
+    });
+
+    document.getElementById('clearBtn').addEventListener('click', () => {
+        document.getElementById('imageUrl').value = '';
+        document.getElementById('postDescription').value = '';
+        document.getElementById('captionArea').value = '';
+        document.getElementById('scheduledAt').value = '';
+    });
+
+    // ── Posts List ──────────────────────────────────────────────────────────────
+
+    async function loadPosts() {
+        const container = document.getElementById('postsList');
+        try {
+            const posts = await apiFetch('/api/posts');
+
+            if (!posts.length) {
+                container.innerHTML = '<div class="empty-state">投稿がまだありません</div>';
+                return;
+            }
+
+            container.innerHTML = `
+                <div class="posts-list">
+                    <div class="post-row header">
+                        <span>画像</span>
+                        <span>キャプション</span>
+                        <span>日時</span>
+                        <span>ステータス</span>
+                        <span></span>
+                    </div>
+                    ${posts.map(renderPostRow).join('')}
+                </div>`;
+
+            container.querySelectorAll('.delete-btn').forEach(btn => {
+                btn.addEventListener('click', () => deletePost(btn.dataset.id));
+            });
+        } catch {
+            container.innerHTML = '<div class="empty-state">投稿の読み込みに失敗しました</div>';
+        }
+    }
+
+    function renderPostRow(post) {
+        const date = post.publishedAt || post.scheduledAt || post.createdAt;
+        const dateStr = new Date(date).toLocaleString('ja-JP', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+        const canDelete = post.status !== 'published';
+
+        const badgeClass = {
+            scheduled: 'badge-scheduled',
+            pending: 'badge-pending',
+            processing: 'badge-processing',
+            published: 'badge-published',
+            failed: 'badge-failed'
+        }[post.status] || '';
+
+        const statusLabel = {
+            scheduled: 'スケジュール済',
+            pending: '処理待ち',
+            processing: '処理中',
+            published: '公開済み',
+            failed: '失敗'
+        }[post.status] || post.status;
+
+        return `
+            <div class="post-row">
+                <img class="post-thumb" src="${escHtml(post.imageUrl)}" alt="" onerror="this.style.opacity='0.2'">
+                <div>
+                    <div class="post-caption-preview">${escHtml(post.caption)}</div>
+                    ${post.error ? `<div style="color:#c00;font-size:0.75rem;margin-top:4px">${escHtml(post.error)}</div>` : ''}
+                </div>
+                <div class="post-date">${dateStr}</div>
+                <div><span class="badge ${badgeClass}">${statusLabel}</span></div>
+                <div>
+                    ${canDelete
+                        ? `<button class="btn btn-danger btn-sm delete-btn" data-id="${escHtml(post.id)}">削除</button>`
+                        : ''}
+                </div>
+            </div>`;
+    }
+
+    async function deletePost(id) {
+        if (!confirm('この投稿を削除しますか？')) return;
+        try {
+            await apiFetch(`/api/posts/${id}`, { method: 'DELETE' });
+            await loadPosts();
+        } catch (err) {
+            showAlert('削除に失敗しました: ' + err.message, 'error');
+        }
+    }
+
+    // ── Auto-refresh ────────────────────────────────────────────────────────────
+
+    setInterval(loadPosts, 15000);
+
+    // ── Helpers ─────────────────────────────────────────────────────────────────
+
+    async function apiFetch(path, opts = {}) {
+        const res = await fetch(API + path, opts);
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || res.statusText);
+        return data;
+    }
+
+    function showAlert(msg, type) {
+        const area = document.getElementById('alertArea');
+        const div = document.createElement('div');
+        div.className = `alert alert-${type}`;
+        div.textContent = msg;
+        area.innerHTML = '';
+        area.appendChild(div);
+        setTimeout(() => div.remove(), 6000);
+    }
+
+    function escHtml(str) {
+        return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+</script>
+</body>
+</html>

@@ -125,6 +125,50 @@
         </div>
     </footer>
 
+    <!-- AI Manas Chat Widget -->
+    <div id="ai-manas-widget">
+        <button class="manas-toggle" id="manasToggle" aria-label="AIマナスに相談する">
+            <i class="fas fa-comment-dots"></i>
+            <span>AI マナス</span>
+        </button>
+        <div class="manas-window" id="manasWindow">
+            <div class="manas-header">
+                <div class="manas-identity">
+                    <div class="manas-avatar">M</div>
+                    <div class="manas-info">
+                        <strong>マナス</strong>
+                        <small>AI スタイリスト</small>
+                    </div>
+                </div>
+                <div class="manas-header-actions">
+                    <button class="manas-settings-btn" id="manasSettingsBtn" aria-label="設定">
+                        <i class="fas fa-cog"></i>
+                    </button>
+                    <button class="manas-close-btn" id="manasClose" aria-label="閉じる">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="manas-messages" id="manasMessages">
+                <div class="manas-msg manas-msg--bot">
+                    <p>こんにちは！AIスタイリストのマナスです。<br>カット・カラー・パーマのご質問やスタイル相談はお気軽にどうぞ。</p>
+                </div>
+            </div>
+            <div class="manas-setup" id="manasSetup">
+                <p class="manas-setup-title">APIキーを設定してください</p>
+                <p class="manas-setup-desc">Anthropic APIキーを入力するとAIと会話できます。キーはブラウザに保存されます。</p>
+                <input type="password" id="manasApiKey" placeholder="sk-ant-..." autocomplete="off">
+                <button id="manasSaveKey">設定して開始</button>
+            </div>
+            <div class="manas-input-area" id="manasInputArea">
+                <input type="text" id="manasInput" placeholder="メッセージを入力..." autocomplete="off">
+                <button id="manasSend" aria-label="送信">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 
