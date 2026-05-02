@@ -388,6 +388,284 @@ h6 {
     transform: translateY(0);
 }
 
+/* AI Manas Chat Widget */
+#ai-manas-widget {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 2000;
+    font-family: var(--font-primary), var(--font-ja);
+}
+
+.manas-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 22px;
+    background-color: var(--color-black);
+    color: var(--color-white);
+    border: none;
+    cursor: pointer;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+.manas-toggle:hover {
+    background-color: var(--color-dark-gray);
+    transform: translateY(-2px);
+}
+
+.manas-toggle i {
+    font-size: 1rem;
+}
+
+.manas-window {
+    position: absolute;
+    bottom: calc(100% + 15px);
+    right: 0;
+    width: 360px;
+    background-color: var(--color-white);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    transform: translateY(10px) scale(0.97);
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    max-height: 520px;
+}
+
+.manas-window.open {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: all;
+}
+
+.manas-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    background-color: var(--color-black);
+    color: var(--color-white);
+    flex-shrink: 0;
+}
+
+.manas-identity {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.manas-avatar {
+    width: 36px;
+    height: 36px;
+    background-color: var(--color-white);
+    color: var(--color-black);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 0;
+    flex-shrink: 0;
+}
+
+.manas-info {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.3;
+}
+
+.manas-info strong {
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+}
+
+.manas-info small {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 0.05em;
+}
+
+.manas-header-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.manas-settings-btn,
+.manas-close-btn {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    padding: 4px 6px;
+    font-size: 0.85rem;
+    transition: color 0.2s ease;
+}
+
+.manas-settings-btn:hover,
+.manas-close-btn:hover {
+    color: var(--color-white);
+}
+
+.manas-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-height: 200px;
+    max-height: 300px;
+    background-color: #fafafa;
+}
+
+.manas-messages::-webkit-scrollbar {
+    width: 4px;
+}
+
+.manas-messages::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.15);
+}
+
+.manas-msg {
+    max-width: 80%;
+    line-height: 1.7;
+}
+
+.manas-msg p {
+    font-size: 0.9rem;
+    padding: 12px 16px;
+    margin: 0;
+}
+
+.manas-msg--bot {
+    align-self: flex-start;
+}
+
+.manas-msg--bot p {
+    background-color: var(--color-white);
+    color: var(--color-black);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.manas-msg--user {
+    align-self: flex-end;
+}
+
+.manas-msg--user p {
+    background-color: var(--color-black);
+    color: var(--color-white);
+}
+
+.manas-typing p {
+    color: #999;
+    font-style: italic;
+}
+
+.manas-setup {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    flex-shrink: 0;
+    background-color: var(--color-white);
+}
+
+.manas-setup-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.manas-setup-desc {
+    font-size: 0.8rem;
+    color: #777;
+    margin: 0;
+    line-height: 1.6;
+}
+
+.manas-setup input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    font-size: 0.85rem;
+    font-family: var(--font-primary), var(--font-ja);
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.manas-setup input:focus {
+    border-color: var(--color-black);
+}
+
+.manas-setup button {
+    padding: 11px;
+    background-color: var(--color-black);
+    color: var(--color-white);
+    border: none;
+    cursor: pointer;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease;
+}
+
+.manas-setup button:hover {
+    background-color: var(--color-dark-gray);
+}
+
+.manas-input-area {
+    display: flex;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    flex-shrink: 0;
+    background-color: var(--color-white);
+}
+
+.manas-input-area input {
+    flex: 1;
+    padding: 14px 16px;
+    border: none;
+    font-size: 0.9rem;
+    font-family: var(--font-primary), var(--font-ja);
+    outline: none;
+    background: transparent;
+    color: var(--color-black);
+}
+
+.manas-input-area input::placeholder {
+    color: #aaa;
+}
+
+#manasSend {
+    padding: 14px 18px;
+    background-color: var(--color-black);
+    color: var(--color-white);
+    border: none;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: background-color 0.3s ease;
+    flex-shrink: 0;
+}
+
+#manasSend:hover {
+    background-color: var(--color-dark-gray);
+}
+
+#manasSend:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .main-title {
@@ -413,5 +691,23 @@ h6 {
 
     .skill-item {
         padding: 30px 20px;
+    }
+
+    #ai-manas-widget {
+        bottom: 20px;
+        right: 20px;
+    }
+
+    .manas-window {
+        width: calc(100vw - 40px);
+        right: 0;
+    }
+
+    .manas-toggle span {
+        display: none;
+    }
+
+    .manas-toggle {
+        padding: 14px 18px;
     }
 }
